@@ -46,9 +46,15 @@ name: 'Terraform'
 
 on:
   push:
+    paths-ignore:
+      - 'README.*'
+      - 'img/**'
     branches:
     - master
   pull_request:
+    paths-ignore:
+      - 'README.*'
+      - 'img/**'
 
 jobs:
   terraform:
