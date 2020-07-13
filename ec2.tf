@@ -1,10 +1,10 @@
 resource "aws_instance" "nginx" {
 
-  ami           = "${lookup(var.AMI, var.AWS_REGION)}"
+  ami           = "${lookup(var.ami, var.aws_region)}"
   instance_type = "t3.nano"
 
   # VPC
-  subnet_id = "${aws_subnet.awesome-sandbox-tf-1a.id}"
+  subnet_id = "${module.vpc.subnet_a_id}"
 
   # Security Group
   vpc_security_group_ids = ["${aws_security_group.ssh-http-allowed.id}"]
