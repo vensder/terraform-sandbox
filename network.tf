@@ -1,41 +1,41 @@
 # Create Internet Gateway
-resource "aws_internet_gateway" "awesome-sandbox-tf-igw" {
-  vpc_id = "${aws_vpc.awesome-sandbox-tf.id}"
+resource "aws_internet_gateway" "sandbox-igw" {
+  vpc_id = "${module.vpc.vpc_id}"
   tags = {
-    Name = "awesome-sandbox-tf-igw"
+    Name = "sandbox-igw"
   }
 }
 
 # Create Custom Route Table
-resource "aws_route_table" "awesome-sandbox-tf-crt" {
-  vpc_id = "${aws_vpc.awesome-sandbox-tf.id}"
+resource "aws_route_table" "sandbox-crt" {
+  vpc_id = "${module.vpc.vpc_id}"
 
   route {
     //associated subnet can reach everywhere
     cidr_block = "0.0.0.0/0"
     //CRT uses this IGW to reach internet
-    gateway_id = "${aws_internet_gateway.awesome-sandbox-tf-igw.id}"
+    gateway_id = "${aws_internet_gateway.sandbox-igw.id}"
   }
 
   tags = {
-    Name = "awesome-sandbox-tf-crt"
+    Name = "sandbox-crt"
   }
 }
 
 # Associate CRT and Subnets
-resource "aws_route_table_association" "awesome-sandbox-tf-crta-subnet-1a" {
-  subnet_id      = "${aws_subnet.awesome-sandbox-tf-1a.id}"
-  route_table_id = "${aws_route_table.awesome-sandbox-tf-crt.id}"
+resource "aws_route_table_association" "sandbox-crta-subnet-a" {
+  subnet_id      = "${module.vpc.subnet_a_id}"
+  route_table_id = "${aws_route_table.sandbox-crt.id}"
 }
 
-resource "aws_route_table_association" "awesome-sandbox-tf-crta-subnet-1b" {
-  subnet_id      = "${aws_subnet.awesome-sandbox-tf-1b.id}"
-  route_table_id = "${aws_route_table.awesome-sandbox-tf-crt.id}"
+resource "aws_route_table_association" "sandbox-crta-subnet-b" {
+  subnet_id      = "${module.vpc.subnet_b_id}"
+  route_table_id = "${aws_route_table.sandbox-crt.id}"
 }
 
 # Create s Security Group
 resource "aws_security_group" "ssh-http-allowed" {
-  vpc_id = "${aws_vpc.awesome-sandbox-tf.id}"
+  vpc_id = "${module.vpc.vpc_id}"
 
   egress {
     from_port   = 0

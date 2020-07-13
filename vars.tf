@@ -1,4 +1,4 @@
-variable "AWS_REGION" {
+variable "aws_region" {
   default = "us-east-1"
   /// default = "us-east-2"
   /// default = "us-west-2"
@@ -13,7 +13,7 @@ variable "AWS_REGION" {
 }
 
 # https://cloud-images.ubuntu.com/locator/ec2/
-variable "AMI" {
+variable "ami" {
   type = map(string)
   default = {
     ap-east-1      = "ami-9f793dee"
