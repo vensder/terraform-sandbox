@@ -7,7 +7,7 @@ resource "aws_instance" "nginx" {
   subnet_id = "${module.vpc.subnet_a_id}"
 
   # Security Group
-  vpc_security_group_ids = ["${aws_security_group.ssh-http-allowed.id}"]
+  vpc_security_group_ids = ["${aws_security_group.ssh_http_allowed.id}"]
 
 
   user_data = <<EOF
