@@ -4,9 +4,9 @@ output "vpc_id" {
 }
 
 output "subnet_a_id" {
-  value = "${aws_subnet.sandbox-a.id}"
+  value = "${aws_subnet.sandbox_a.id}"
 }
 
 output "subnet_b_id" {
-  value = "${aws_subnet.sandbox-b.id}"
+  value = "${aws_subnet.sandbox_b.id}"
 }

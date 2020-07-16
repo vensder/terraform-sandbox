@@ -10,7 +10,7 @@ resource "aws_vpc" "sandbox" {
 }
 
 # Create two subnets in the different AZ
-resource "aws_subnet" "sandbox-a" {
+resource "aws_subnet" "sandbox_a" {
   vpc_id                  = "${aws_vpc.sandbox.id}"
   cidr_block              = "${var.subnet_a_cidr}"
   map_public_ip_on_launch = "true"               # should be assigned a public IP address
@@ -20,7 +20,7 @@ resource "aws_subnet" "sandbox-a" {
   }
 }
 
-resource "aws_subnet" "sandbox-b" {
+resource "aws_subnet" "sandbox_b" {
   vpc_id                  = "${aws_vpc.sandbox.id}"
   cidr_block              = "${var.subnet_b_cidr}"
   map_public_ip_on_launch = "true"               # should be assigned a public IP address
